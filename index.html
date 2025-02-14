@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Landing Page - Jasa Import</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#about">Tentang Kami</a></li>
+            <li><a href="#services">Layanan</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+    </nav>
+    <div class="hero">
+        <h1>Selamat Datang di Perusahaan Jasa Import</h1>
+        <p>Kami membantu Anda mengimpor barang dengan mudah dan aman</p>
+        <button class="btn" onclick="scrollToAbout()">Pelajari Lebih Lanjut</button>
+    </div>
+    <div class="carousel" id="carousel">
+        <button class="prev" onclick="prevImage()">&#10094;</button>
+        <img src="./images/image1.png" class="active" alt="Slide 1">
+        <img src="./images/image2.png" alt="Slide 2">
+        <img src="./images/image3.png" alt="Slide 3">
+        <button class="next" onclick="nextImage()">&#10095;</button>
+    </div>
+    <section id="about">
+        <h2>Tentang Kami</h2>
+        <p>Kami adalah perusahaan yang bergerak di bidang jasa import barang dengan pengalaman bertahun-tahun.</p>
+    </section>
+    <section class="services" id="services">
+        <h2>Layanan Kami</h2>
+        <p>Kami menyediakan layanan pengurusan import, pengiriman barang, dan konsultasi.</p>
+    </section>
+    <section id="contact">
+        <h2>Kontak Kami</h2>
+        <p>Email: info@jasaimpor.com | Telepon: +62 812 3456 7890</p>
+    </section>
+    <script>
+        function scrollToAbout() {
+            document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+        }
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+        function showImage(index) {
+            images.forEach(img => img.classList.remove('active'));
+            currentIndex = (index + images.length) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+        function nextImage() { showImage(currentIndex + 1); }
+        function prevImage() { showImage(currentIndex - 1); }
+        setInterval(nextImage, 5000);
+        window.addEventListener("scroll", () => {
+            document.querySelectorAll("section").forEach(sec => {
+                if (sec.getBoundingClientRect().top < window.innerHeight - 100) {
+                    sec.classList.add("show");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
